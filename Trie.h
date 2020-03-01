@@ -12,16 +12,21 @@ class TrieNode{
  public:
   TrieNode* children[26];
   char letter;
+  char* word[37];
+  int depth;
+  TrieNode();
  private:
   friend class Trie;
 };
 
 class Trie{
  public:
-  TrieNode *root;
+  TrieNode** root[26];
   Trie();
-  void insert(const char* word, TrieNode* t, int depth);
+  void insert(const char* word);
+  void insert(TrieNode* currentNode, int depth);
 };
+
 
 
 #endif //P4_TRIE_H

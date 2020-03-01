@@ -7,24 +7,44 @@
 #include <iostream>
 #include <fstream>
 
+using namespace std;
 
 Trie::Trie() {
-  root = new TrieNode[26];
+  for (int i = 0; i < 26; i++) {
+    root[i] = NULL;
+  }
 }
 
-void Trie::insert(const char* word, TrieNode* t, int depth){
-  if (word[depth] == '\0') {
-    return;
+//TrieNode::TrieNode() {
+//  this->letter = letter;
+//  for (int i; i<26; i++){
+//    this->children[i] = NULL;
+//  }
+//}
+
+TrieNode::TrieNode() {
+  letter = '\0';
+  for (int i = 0; i < 26; i++) {
+    children[i] = NULL;
   }
-  else if (t->children[depth]->letter != '\0' && word[depth] == t->children[word[depth]-'a']->letter) {
-    depth++;
-    insert(word,t->children[word[depth]-'a'],depth);
+  for (int i = 0; i < 37; i++) {
+    word[i] = NULL;
+  }
+  depth = 0;
+}
+
+
+void Trie::insert(const char* word) {
+//  TrieNode* currentNode = root;
+  if (root[word[depth]-'a'] == NULL){
+      insert(root[word[root->depth]-'a'],root->depth);
   }
   else {
-    TrieNode* newNode = new TrieNode[26];
-    newNode->letter = word[depth];
-    t->children[word[depth]-'a'] = newNode;
-    depth++;
-    insert(word, newNode, depth);
+    insert(root[word[depth]-'a'],depth);
   }
+}
+
+void Trie::insert(TrieNode* currentNode, int depth) {
+  currentNode->children[0];
+ return;
 }

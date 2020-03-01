@@ -10,9 +10,9 @@ using namespace std;
 
 Checker::Checker(const DictionaryWord *words, int numWords) 
 {
-  trie = new Trie;
+  trie = new Trie(words, numWords);
   for (int i = 0; i<numWords; i++) {
-    trie->insert(words[i].word, trie->root, 0);
+    trie->insert(words[i].word);
   }
 } // Checker()
 

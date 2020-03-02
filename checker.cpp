@@ -23,7 +23,9 @@ Checker::Checker(const DictionaryWord *words, int numWords)
 
 void Checker::findWord(const char *word, char matchingWords[100][MAX_LENGTH + 1], int *count){
   char tempWord[37] = "";
+  *count = 0;
   findCloseMatch(word, matchingWords, count, this->trie, 0, 0, tempWord);
+  cout << matchingWords[0] << endl;
 }
 
 
@@ -32,10 +34,16 @@ void Checker::findCloseMatch(const char *word, char matchingWords[100][MAX_LENGT
   if (error > 1) {
     return;
   }
+  if (*count > 1 && strcmp(tempWord,word)==0) {
+    *count = 1;
+    strcpy(matchingWords[0],tempWord);
+    return;
+  }
   if (trie->endOfWord && word[depth] == '\0') {
-//    strcpy(matchingWords[*count],tempWord);
+    strcpy(matchingWords[*count],tempWord);
     ++*count;
-    cout << tempWord << endl;
+//    cout << tempWord << endl;
+//    cout << *count<< endl;
     return;
   }
   if (error == 1){

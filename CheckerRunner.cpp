@@ -64,31 +64,30 @@ int main(int argc, char **argv)
     strcpy(word, matchingWordsKey[i].word);
     checker->findWord(word, matchingWords, &count);
 
-//    if(count != matchingWordsKey[i].count)
-//    {
-//      cout << "Incorrect count for trial# " << i << " for "
-//        << matchingWordsKey[i].word << " should be "
-//        << matchingWordsKey[i].count << " but received " << count << endl;
-//    }
-//    else // correct count
-//    {
-//      for(int j = 0; j < count; j++)
-//      {
-//        bool OK = false;
-//        for(int k = 0; !OK && k < count; k++)
-//          if(strcmp(matchingWordsKey[i].matches[j], matchingWords[k]) == 0)
-//            OK = true;
-//
-//        if(!OK)
-//        {
-//          cout << "Words don't match for trial# " << i << " for "
-//             << matchingWordsKey[i].word << "they do not include"
-//             << matchingWordsKey[i].matches[j] << endl;
-//        } // if invalid match
-//      } // for j
-//    } // else correct count
-  }  // for each word
+    if(count != matchingWordsKey[i].count)
+    {
+      cout << "Incorrect count for trial# " << i << " for "
+        << matchingWordsKey[i].word << " should be "
+        << matchingWordsKey[i].count << " but received " << count << endl;
+    }
+    else // correct count
+    {
+      for(int j = 0; j < count; j++)
+      {
+        bool OK = false;
+        for(int k = 0; !OK && k < count; k++)
+          if(strcmp(matchingWordsKey[i].matches[j], matchingWords[k]) == 0)
+            OK = true;
 
+        if(!OK)
+        {
+          cout << "Words don't match for trial# " << i << " for "
+             << matchingWordsKey[i].word << "they do not include"
+             << matchingWordsKey[i].matches[j] << endl;
+        } // if invalid match
+      } // for j
+    } // else correct count
+  }  // for each word
   cout << "CPU Time: " << ct.cur_CPUTime() << endl;
   return 0;
 }

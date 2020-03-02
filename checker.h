@@ -7,9 +7,11 @@
 class Checker {
 public:
   Checker(const DictionaryWord *words, int numWords);
-  void findWord(const char *word, char matchingWords[100][MAX_LENGTH + 1],
-    int *count);
-private:
+  void findWord(const char *word, char matchingWords[100][MAX_LENGTH + 1],int *count);
+  Trie* trie;
+  void findCloseMatch(const char *word, char matchingWords[100][MAX_LENGTH + 1], int *count,
+      Trie* trie, int depth, int error, char* tempWord);
+    private:
 
 }; // class Checker 
 

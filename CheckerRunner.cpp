@@ -55,16 +55,15 @@ int main(int argc, char **argv)
   char word[MAX_LENGTH + 1], matchingWords[100][MAX_LENGTH + 1];
   int numWords, count;
   DictionaryWord *words = readWordsFile();
-//  MatchingWords *matchingWordsKey = readTesterFile(argv[1], &numWords);
+  MatchingWords *matchingWordsKey = readTesterFile(argv[1], &numWords);
   CPUTimer ct;
   Checker *checker = new Checker((const DictionaryWord*) words, NUM_WORDS);
   delete words;
- 
-//  for(int i = 0; i < numWords; i++)
-//  {
-//    strcpy(word, matchingWordsKey[i].word);
-//    checker->findWord(word, matchingWords, &count);
-//
+  for(int i = 0; i < numWords; i++)
+  {
+    strcpy(word, matchingWordsKey[i].word);
+    checker->findWord(word, matchingWords, &count);
+
 //    if(count != matchingWordsKey[i].count)
 //    {
 //      cout << "Incorrect count for trial# " << i << " for "
@@ -88,8 +87,8 @@ int main(int argc, char **argv)
 //        } // if invalid match
 //      } // for j
 //    } // else correct count
-//  }  // for each word
-//
+  }  // for each word
+
   cout << "CPU Time: " << ct.cur_CPUTime() << endl;
   return 0;
 }

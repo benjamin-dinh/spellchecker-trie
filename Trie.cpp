@@ -34,6 +34,7 @@ void Trie::insert2(Trie* trie, const char* word, int depth)
     if(trie->child[pos] == NULL )
     {
       trie->child[pos] = new Trie();
+      trie->child[pos]->letter = word[depth];
     }
     insert2(trie->child[pos], word, depth+1);
   }
@@ -48,23 +49,21 @@ bool Trie::isBottom(Trie* root)
   return root->endOfWord != false;
 }
 
-
-void Trie::displayContent(Trie* root, char* word, int level)
-{
-
-  if (isBottom(root))
-  {
-    word[level] = '\0';
-    cout << word << endl;
-  }
-
-  for (int i = 0; i < 26; i++)
-  {
-    if (root->child[i])
-    {
-      word[level] = i + 'a';
-      displayContent(root->child[i], word, level + 1);
-    }
-  }
-}
+//
+//void Trie::print(Trie* root, char* tempWord, int level)
+//{
+//  if (isBottom(root))
+//  {
+//    tempWord[level] = '\0';
+//    cout << tempWord << endl;
+//  }
+//  for (int i = 0; i < 26; i++)
+//  {
+//    if (root->child[i])
+//    {
+//      tempWord[level] = i + 'a';
+//      print(root->child[i], tempWord, level + 1);
+//    }
+//  }
+//}
 

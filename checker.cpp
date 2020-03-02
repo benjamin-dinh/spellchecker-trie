@@ -10,20 +10,55 @@ using namespace std;
 
 Checker::Checker(const DictionaryWord *words, int numWords) 
 {
-  Trie *newNode = new Trie();
+  trie = new Trie();
   for (int i = 0; i < numWords; i++){
-    newNode->insert(newNode,words[i].word);
+    trie->insert(trie,words[i].word);
   }
-  int level = 0;
-  char word[37];
-  newNode->displayContent(newNode, word, 0);
+//  int level = 0;
+//  char word[37];
+//  trie->print(trie, word, 0);
 } // Checker()
 
 
 
-void Checker::findWord(const char *word, char matchingWords[100][MAX_LENGTH + 1],
-  int *count)
-{
+void Checker::findWord(const char *word, char matchingWords[100][MAX_LENGTH + 1], int *count){
+  char tempWord[37] = "";
+  findCloseMatch(word, matchingWords, count, this->trie, 0, 0, tempWord);
 }
 
 
+void Checker::findCloseMatch(const char *word, char matchingWords[100][MAX_LENGTH + 1], int *count,
+    Trie* trie, int depth, int error, char* tempWord){
+  if (error > 1) {
+    return;
+  }
+  if (trie->endOfWord && word[depth] == '\0') {
+//    strcpy(matchingWords[*count],tempWord);
+    ++*count;
+    cout << tempWord << endl;
+    return;
+  }
+  if (error == 1){
+    if (trie->child[word[depth]-'a']){
+      tempWord[depth] = trie->child[word[depth]-'a']->letter;
+      findCloseMatch(word,matchingWords,count,trie->child[word[depth]-'a'],depth+1,error,tempWord);
+    }
+    else {
+      return;
+    }
+  }
+  else {
+    for (int i = 0; i<26 && word[depth]!= '\0' ; i++){
+      if (trie->child[i]){
+        if (trie->child[i]->letter == word[depth]){
+          tempWord[depth] = trie->child[i]->letter;
+          findCloseMatch(word,matchingWords,count,trie->child[i],depth+1,error,tempWord);
+        }
+        else {
+          tempWord[depth] = trie->child[i]->letter;
+          findCloseMatch(word,matchingWords,count,trie->child[i],depth+1,error+1,tempWord);
+        }
+      }
+    }
+  }
+}

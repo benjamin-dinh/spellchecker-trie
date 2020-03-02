@@ -11,14 +11,14 @@
 class Trie{
  public:
   Trie* child[26];
-  // endOfWord is true if the node represents
-  // end of a word
   bool endOfWord;
+  char letter;
   Trie();
   void insert(Trie* trie, const char* word);
   void insert2(Trie* trie, const char* word, int depth);
   bool isBottom(Trie* root);
-  void displayContent(Trie* root, char* word, int level);
+  void print(Trie* root, char* word, int level);
+  void printWord();
 };
 
 

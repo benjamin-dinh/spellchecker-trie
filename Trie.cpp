@@ -9,42 +9,62 @@
 
 using namespace std;
 
-Trie::Trie() {
-  for (int i = 0; i < 26; i++) {
-    root[i] = NULL;
+Trie::Trie()
+{
+//  Trie *newNode = new Trie();
+  this->endOfWord = false;
+  for(int i=0 ; i<26 ; i++)
+  {
+    //Initially , initialize null to the all child
+    this->child[i] = NULL;
+  }
+//  return newNode;
+}
+
+void Trie::insert(Trie* trie, const char* word)
+{
+  insert2(trie, word, 0);
+}
+
+void Trie::insert2(Trie* trie, const char* word, int depth)
+{
+  if(word[depth] != '\0')
+  {
+    int pos = word[depth] - 'a';
+    if(trie->child[pos] == NULL )
+    {
+      trie->child[pos] = new Trie();
+    }
+    insert2(trie->child[pos], word, depth+1);
+  }
+  else // end of string
+  {
+    trie->endOfWord = true;
   }
 }
 
-//TrieNode::TrieNode() {
-//  this->letter = letter;
-//  for (int i; i<26; i++){
-//    this->children[i] = NULL;
-//  }
-//}
-
-TrieNode::TrieNode() {
-  letter = '\0';
-  for (int i = 0; i < 26; i++) {
-    children[i] = NULL;
-  }
-  for (int i = 0; i < 37; i++) {
-    word[i] = NULL;
-  }
-  depth = 0;
+bool Trie::isBottom(Trie* root)
+{
+  return root->endOfWord != false;
 }
 
 
-void Trie::insert(const char* word) {
-//  TrieNode* currentNode = root;
-  if (root[word[depth]-'a'] == NULL){
-      insert(root[word[root->depth]-'a'],root->depth);
+void Trie::displayContent(Trie* root, char* word, int level)
+{
+
+  if (isBottom(root))
+  {
+    word[level] = '\0';
+    cout << word << endl;
   }
-  else {
-    insert(root[word[depth]-'a'],depth);
+
+  for (int i = 0; i < 26; i++)
+  {
+    if (root->child[i])
+    {
+      word[level] = i + 'a';
+      displayContent(root->child[i], word, level + 1);
+    }
   }
 }
 
-void Trie::insert(TrieNode* currentNode, int depth) {
-  currentNode->children[0];
- return;
-}

@@ -7,24 +7,18 @@
 
 #include "CheckerRunner.h"
 
-class Trie;
-class TrieNode{
- public:
-  TrieNode* children[26];
-  char letter;
-  char* word[37];
-  int depth;
-  TrieNode();
- private:
-  friend class Trie;
-};
 
 class Trie{
  public:
-  TrieNode** root[26];
+  Trie* child[26];
+  // endOfWord is true if the node represents
+  // end of a word
+  bool endOfWord;
   Trie();
-  void insert(const char* word);
-  void insert(TrieNode* currentNode, int depth);
+  void insert(Trie* trie, const char* word);
+  void insert2(Trie* trie, const char* word, int depth);
+  bool isBottom(Trie* root);
+  void displayContent(Trie* root, char* word, int level);
 };
 
 

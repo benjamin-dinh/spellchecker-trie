@@ -9,7 +9,6 @@ public:
   Checker(const DictionaryWord *words, int numWords);
   void findWord(const char *word, char matchingWords[100][MAX_LENGTH + 1],
     int *count);
-  Trie* trie;
 private:
 
 }; // class Checker 

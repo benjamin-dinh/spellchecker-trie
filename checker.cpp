@@ -10,10 +10,13 @@ using namespace std;
 
 Checker::Checker(const DictionaryWord *words, int numWords) 
 {
-  trie = new Trie(words, numWords);
-  for (int i = 0; i<numWords; i++) {
-    trie->insert(words[i].word);
+  Trie *newNode = new Trie();
+  for (int i = 0; i < numWords; i++){
+    newNode->insert(newNode,words[i].word);
   }
+  int level = 0;
+  char word[37];
+  newNode->displayContent(newNode, word, 0);
 } // Checker()
 
 

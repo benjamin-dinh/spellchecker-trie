@@ -7,7 +7,7 @@ checker.o : checker.cpp CheckerRunner.h checker.h Trie.h
 CheckerRunner.o : CheckerRunner.cpp CheckerRunner.h checker.h CPUTimer.h 
 	g++ -ansi -Wall -g -c CheckerRunner.cpp
 
-Trie.o : Trie.cpp Trie.h
+Trie.o : Trie.cpp Trie.h CheckerRunner.h
     g++ -ansi -Wall -g -c Trie.cpp
 clean : 
 	rm -f checker.out checker.o  CheckerRunner.o Trie.o

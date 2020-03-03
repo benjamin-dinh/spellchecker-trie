@@ -34,7 +34,6 @@ void Checker::findWord(const char *word, char matchingWords[100][MAX_LENGTH + 1]
       return;
       }
     }
-
   findClose(word, matchingWords, count, trie, 0, 0, tempWord);
 }
 
